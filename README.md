@@ -30,8 +30,8 @@
     {print hasil}}->mencetak hasil WA_Sales_Products_2012-14.csv, nama file yang berformat csv
     sort -nr 
     head -1 -> menampilkan output bagian pertama dari file (dengan out put satu baris saja yang diminta)```
+    2) Tentukan tiga product line yang memberikan penjualan(quantity)terbanyak pada soal poin a.
     
-  2) Tentukan tiga product line yang memberikan penjualan(quantity)terbanyak pada soal poin a.
     ```awk -F ',' '{if($7 == '2012' && $1 == "United States") p[$4]+=$10} END 
     {for(hasil in p) {print p[hasil],hasil}}' WA_Sales_Products_2012-14.csv | sort -nr | awk 'NR<=3 {print $2,$3}'
     → akan mengaktifkan awk, awk bisa digenerate menjadi laporan yang berformat dan awk mempunyai operator aritmatika dan string.
