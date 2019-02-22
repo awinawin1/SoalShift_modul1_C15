@@ -87,32 +87,52 @@ Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak
 ## soal4
   Lakukan backup file syslog setiap jam dengan format nama file “jam:menit tanggal- bulan-tahun”. Isi dari file backup terenkripsi dengan      konversi huruf (string manipulation) yang disesuaikan dengan jam dilakukannya backup misalkan sebagai berikut:
    Huruf b adalah alfabet kedua, sedangkan saat ini waktu menunjukkan pukul 12, sehingga huruf b diganti dengan huruf alfabet yang memiliki urutan ke 12+2 = 14. Hasilnya huruf b menjadi huruf n karena huruf n adalah huruf ke empat belas, dan seterusnya. setelah huruf z akan kembali ke huruf a. Backup file syslog setiap jam. dan buatkan juga bash script untuk dekripsinya.
-  ```#!/bin/bash
+   enkripsi
+   ```
+   #!/bin/bash
 
-    hour=$(date +"%H")
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+lowcase=abcdefghijklmnopqrstuvwxyz
 
-    if [[ ${hour:0:1} -eq 0 ]]
-    then
-       hour=${hour:1:1}
-    fi
+up=($(echo ${upcase[@]})$(echo ${upcase[@]}))
+low=($(echo ${lowcase[@]})$(echo ${lowcase[@]}))
+hour=`date +"%H"`
+rot=$hour
 
-    #echo $hour
+xx=($(echo ${upcase[@]})$(echo ${lowcase[@]}))
+upp=$(echo $upercase | tr "${upcase:0:26}" "${up:${rot}:26}")
+loww=$(echo $lowcase | tr "${upcase:0:26}" "${low:${rot}:26}")
+xxx=($(echo ${up[@]})$(echo ${low[@]}))
 
-    lowcase=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-    syslog=$(</var/log/syslog) →mengambil isi dari varlog/syslog dimasukkan ke syslog
-    #echo "$syslog"
-    syslog=$(echo "$syslog" | tr "${lowcase:0:26}" "${lowcase:${hour}:26}") → di 	print, menyeleksi yang sesuai lowcase dan ditambahkan nilai alfabet sesuai jamnya untuk 	lowcase
+file=`date +"%H:%M %d-%m-%Y"`s
 
-    #echo "$syslog"
-  upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
-  syslog=$(echo "$syslog" | tr "${upcase:0:26}" "${upcase:${hour}:26}")
-  ->→ di print, menyeleksi yang sesuai upcase dan ditambahkan nilai alfabet sesuai jamnya untuk 	upcase
-  #echo "$syslog"
+< /var/log/syslog > "$file" tr "$xx" "$xxx"
 
-  thishour=$(date +"%H:%M %d-%m-%Y")→penamaan nama file
-  #echo "$thishour" 
-  #echo "$syslog" > /home/awin/praktikum1/sislog
-  echo "$syslog" > "$thishour" →di print isi dari syslog dipindahkan dalam  file thisour```
+
+   ```
+   dekripsi
+   
+   ```#!/bin/bash
+
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+lowcase=abcdefghijklmnopqrstuvwxyz
+
+up=($(echo ${upcase[@]})$(echo ${upcase[@]}))
+low=($(echo ${lowcase[@]})$(echo ${lowcase[@]}))
+hour=`date +"%H"`
+rot=$hour
+
+xx=($(echo ${upcase[@]})$(echo ${lowcase[@]}))
+upp=$(echo $upercase | tr "${upcase:0:26}" "${up:${rot}:26}")
+loww=$(echo $lowcase | tr "${upcase:0:26}" "${low:${rot}:26}")
+xxx=($(echo ${up[@]})$(echo ${low[@]}))
+
+file=`date +"%H:%M %d-%m-%Y"`s
+
+< /var/log/syslog > "$file" tr "$xx" "$xxx"
+
+
+
   
   pengaturan crontab:
   
