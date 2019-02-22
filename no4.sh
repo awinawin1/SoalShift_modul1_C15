@@ -1,26 +1,19 @@
 #!/bin/bash
 
-hour=$(date +"%H")
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+lowcase=abcdefghijklmnopqrstuvwxyz
 
-if [[ ${hour:0:1} -eq 0 ]]
-then
-    hour=${hour:1:1}
-fi
+up=($(echo ${upcase[@]})$(echo ${upcase[@]}))
+low=($(echo ${lowcase[@]})$(echo ${lowcase[@]}))
+hour=`date +"%H"`
+rot=$hour
 
-#echo $hour
+xx=($(echo ${upcase[@]})$(echo ${lowcase[@]}))
+upp=$(echo $upercase | tr "${upcase:0:26}" "${up:${rot}:26}")
+loww=$(echo $lowcase | tr "${upcase:0:26}" "${low:${rot}:26}")
+xxx=($(echo ${up[@]})$(echo ${low[@]}))
 
-lowcase=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
-syslog=$(</var/log/syslog)
-#echo "$syslog"
-syslog=$(echo "$syslog" | tr "${lowcase:0:26}" "${lowcase:${hour}:26}")
-#echo "$syslog"
+file=`date +"%H:%M %d-%m-%Y"`s
 
-upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
-syslog=$(echo "$syslog" | tr "${upcase:0:26}" "${upcase:${hour}:26}")
-#echo "$syslog"
-
-thishour=$(date +"%H:%M %d-%m-%Y")
-#echo "$thishour"
-#echo "$syslog" > /home/awin/praktikum1/sislog
-echo "$syslog" > "$thishour"
+< /var/log/syslog > "$file" tr "$xx" "$xxx"
 
