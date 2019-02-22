@@ -3,26 +3,26 @@
            unzip /home/awin/praktikum1/nature.zip -d /home/awin/praktikum1
            
   2) membuat direktori hasil dalam folder nature. Iterasi untuk memandai foto 1-n, foto yang disimpan akan diberinama pict dan disimpan dalam array, lalu di decrypt menggunakan base64 lalu dibuat formatnya disimpan dalam direktori hasil dengan nama pict-(sesuai urutan) 
-       /home/awin/praktikum1/nature/hasil
-       iter = 0
+       ```/home/awin/praktikum1/nature/hasil
+      iter = 0
        
-       for pict in /home/awin/praktikum1/nature/*.jpg
+      for pict in /home/awin/praktikum1/nature/*.jpg
        
        do
        
        base64 -d $pict | xxd -r > /home/awin/praktikum1/nature/hasil/$iter.jpg
        iter=$((iter+1))
-       done
+      done```
        
-       3) menginstall crontab
-       p ukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
+  3) menginstall crontab
+      pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari.
        
-       14 14 14 2 5 /bin/bash /home/awin/praktikum1/no1.sh
-       13 14 * 2 5 /bin/bash /home/awin/praktikum1/no1.sh
+       ```14 14 14 2 5 /bin/bash /home/awin/praktikum1/no1.sh
+       13 14 * 2 5 /bin/bash /home/awin/praktikum1/no1.sh```
        
-2. Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta untuk memberikan laporan berdasarkan file WA_Sales_Products_2012-14.csv. Laporan yang diminta berupa:
+2. Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta untuk memberikan laporan berdasarkan file     WA_Sales_Products_2012-14.csv. Laporan yang diminta berupa:
   1) Tentukan negara dengan penjualan(quantity) terbanyak pada tahun 2012.
-    awk -F ',' '{if($7 == '2012') iter[$1]+=$10} END {for(hasil in iter) {print hasil}}' WA_Sales_Products_2012-14.csv | sort -nr | head -1 
+    ```awk -F ',' '{if($7 == '2012') iter[$1]+=$10} END {for(hasil in iter) {print hasil}}' WA_Sales_Products_2012-14.csv | sort -nr | head -1 ```
     → akan mengaktifkan awk, awk bisa digenerate menjadi laporan yang berformat dan awk mempunyai operator aritmatika dan string.
     
     if($7 == '2012')-> mencari data yang mengandung tahun “2012” iter[$1]+=$10-> {$10} kolom ke-10.Karena di soal diminta untuk mencari penjualan terbanyak, maka quantity berada pada kolom ke-10. 
