@@ -72,9 +72,8 @@ Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak
 
 
   while [ $loop -ne 0 ] →loop terus sampai 0
-  do
-
-  if [[ -f /home/awin/praktikum1/password$ke.txt ]] ; then → jika ada file yang letaknya di direktori praktikum1 dengan nama password-urutannya.txt maka jika sudah ada 
+    do
+    if [[ -f /home/awin/praktikum1/password$ke.txt ]] ; then → jika ada file yang letaknya di direktori praktikum1 dengan nama password-      urutannya.txt maka jika sudah ada 
   ke=$((ke + 1)) → maka urutannya akan bertambah
   else
   cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1 > →dengan isi pasword secara acak sebanyak 12 karakter yang terdapat huruf besar, huruf kecil, dan angka, 12 karakter, dan 1 row
@@ -83,11 +82,12 @@ Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak
   fi
 
   done```
+  ```
 
 ## soal4
   Lakukan backup file syslog setiap jam dengan format nama file “jam:menit tanggal- bulan-tahun”. Isi dari file backup terenkripsi dengan      konversi huruf (string manipulation) yang disesuaikan dengan jam dilakukannya backup misalkan sebagai berikut:
    Huruf b adalah alfabet kedua, sedangkan saat ini waktu menunjukkan pukul 12, sehingga huruf b diganti dengan huruf alfabet yang memiliki urutan ke 12+2 = 14. Hasilnya huruf b menjadi huruf n karena huruf n adalah huruf ke empat belas, dan seterusnya. setelah huruf z akan kembali ke huruf a. Backup file syslog setiap jam. dan buatkan juga bash script untuk dekripsinya.
-  #!/bin/bash
+  ```#!/bin/bash
 
     hour=$(date +"%H")
 
@@ -112,7 +112,8 @@ Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak
   thishour=$(date +"%H:%M %d-%m-%Y")→penamaan nama file
   #echo "$thishour" 
   #echo "$syslog" > /home/awin/praktikum1/sislog
-  echo "$syslog" > "$thishour" →di print isi dari syslog dipindahkan dalam  file thisour
+  echo "$syslog" > "$thishour" →di print isi dari syslog dipindahkan dalam  file thisour```
+  ```
 
 ## soal5
 Buatlah sebuah script bash untuk menyimpan record dalam syslog yang memenuhi  	kriteria berikut:
