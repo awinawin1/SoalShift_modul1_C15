@@ -113,8 +113,11 @@ Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak
   #echo "$thishour" 
   #echo "$syslog" > /home/awin/praktikum1/sislog
   echo "$syslog" > "$thishour" →di print isi dari syslog dipindahkan dalam  file thisour```
+  
+  pengaturan crontab:
+  
+  0 * * * * /bin/bash /home/awin/praktikum1/no4.sh
   ```
-
 ## soal5
 Buatlah sebuah script bash untuk menyimpan record dalam syslog yang memenuhi  	kriteria berikut:
 
