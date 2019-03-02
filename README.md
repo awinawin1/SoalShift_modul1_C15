@@ -1,4 +1,8 @@
 ## soal1
+
+
+
+
 Anda diminta tolong oleh teman anda untuk mengembalikan filenya yang telah dienkripsi oleh seseorang menggunakan bash script, file yang dimaksud adalah nature.zip. Karena terlalu mudah kalian memberikan syarat akan membuka seluruh file tersebut jika pukul 14:14 pada tanggal 14 Februari atau hari tersebut adalah hari jumat pada bulan Februari. Hint: Base64, Hexdump
   1) unzip file nature.zipyang ada di praktikum1 di simpan  tujuan direktori praktikum 1
            ```unzip /home/awin/praktikum1/nature.zip -d /home/awin/praktikum1```
@@ -20,6 +24,10 @@ Anda diminta tolong oleh teman anda untuk mengembalikan filenya yang telah dienk
        
        ```14 14 14 2 5 /bin/bash /home/awin/praktikum1/no1.sh
        13 14 * 2 5 /bin/bash /home/awin/praktikum1/no1.sh```
+       ```
+       
+       
+       ![alt text](https://lh3.googleusercontent.com/L1RJASFH2oQQT_kL-ULddLFzro4f5rqagJXHgqnkMQ0M1D4R0tloe10HH0YP9BD9EgIun3SQUJQFcK4SaemI=w1299-h630)
        
 ## Soal2
 
@@ -62,6 +70,7 @@ Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta un
     echo "Personal Accesories"
     awk -F ',' '{if($7=='2012' && $1=="United States" && $4=="Personal Accessories") p[$6]+=$10} END {for(hasil in c) {print p[hasil], hasil}}' WA_Sales_Products_2012-14.csv | sort -nr | awk 'NR<=3 {print $2$,$3,$4}’
   → program yang berfungsi dengan nomor 2b dan dengan suatu kondisi bahwa program akan mengecek apakah data sesuai dengan product line"Personal Accesories" dan akan menampilkan data ke-2, ke-3, dan ke-4.
+       ![alt text](https://lh5.googleusercontent.com/btisll35ElMVhKdOCcroorfmvalstRL4_4Hd6QJNxj9AnEAB-XaTA0eDKrBDHUTLr4I6fVi7d1QpMAjMvjQs=w1299-h630)
 
 
 ## soal3
@@ -110,6 +119,11 @@ then
     echo "$uuid" > $path
 fi
 ```
+ ![alt text](https://lh3.googleusercontent.com/aKfw5EnQAWCj2YpUqF4qtC1QT03o8sePaYnNL8UL3FIfxgTvjDjTdNLjIwuKE-FLkwe7Yrup3rOx0PiWjaKq=w1299-h630)
+
+ ![alt text](https://lh3.googleusercontent.com/CJIBCjxb8-6ZCejSi1KXdEpVidW_V5MEXBoLra_mGFNYYGVh_FVhFJIqWU6x01OL-5k73OnVxQlSSgb1o_J6=w1299-h630)
+
+
 
 ## soal4
   Lakukan backup file syslog setiap jam dengan format nama file “jam:menit tanggal- bulan-tahun”. Isi dari file backup terenkripsi dengan      konversi huruf (string manipulation) yang disesuaikan dengan jam dilakukannya backup misalkan sebagai berikut:
@@ -182,6 +196,8 @@ echo "$syslog" > dec/"${choose[this]}.dec"
   
   0 * * * * /bin/bash /home/awin/praktikum1/no4.sh
   ```
+  
+   ![alt text](https://lh4.googleusercontent.com/jLA1WHCVDXr6el9GFfvn3E2-Psc6r3ZOQ3wJ3rwuZ7El9eBVixo3Dnr1sMewsaqUPAs8yZ-L408GC3MZw_0B=w1299-h630)
 ## soal5
 Buatlah sebuah script bash untuk menyimpan record dalam syslog yang memenuhi  	kriteria berikut:
 
@@ -190,3 +206,8 @@ Buatlah sebuah script bash untuk menyimpan record dalam syslog yang memenuhi  	k
 
     pengaturan crontab:
     2-30/6 * * * * /bin/bash /home/awin/praktikum1/no5.sh ->script tadi setiap 6 menit dari 	menit ke 2 hingga 30,
+    
+    
+   ![alt text](https://lh3.googleusercontent.com/3BYpeD9muEkomJQ7HeRXGe2A8Rj2nRDxUEq9K9FEgv5dSMsIxn_fUZ9kVbjWmzgMwJZujDrXv5W-JUTJnze8=w1299-h630)
+    ![alt text](https://lh5.googleusercontent.com/-QuFm6yAb-SPiWapG1Lf4DjtMk6MGeKL7FK8k-iUZ2CqjKHHHwQX4_eubKPFsXtdhkt32QNnry1b3eBLWZId=w1299-h630)
+   
