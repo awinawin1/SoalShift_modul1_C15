@@ -70,7 +70,7 @@ Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta un
     echo "Personal Accesories"
     awk -F ',' '{if($7=='2012' && $1=="United States" && $4=="Personal Accessories") p[$6]+=$10} END {for(hasil in c) {print p[hasil], hasil}}' WA_Sales_Products_2012-14.csv | sort -nr | awk 'NR<=3 {print $2$,$3,$4}’
   → program yang berfungsi dengan nomor 2b dan dengan suatu kondisi bahwa program akan mengecek apakah data sesuai dengan product line"Personal Accesories" dan akan menampilkan data ke-2, ke-3, dan ke-4.
-       ![alt text](https://lh5.googleusercontent.com/btisll35ElMVhKdOCcroorfmvalstRL4_4Hd6QJNxj9AnEAB-XaTA0eDKrBDHUTLr4I6fVi7d1QpMAjMvjQs=w1299-h630)
+       ![alt text](https://lh5.googleusercontent.com/oLYZ3R47XRNPsblP5SDHFvMFzhmtBPiSRqkEwpb7B_Vb7NN9fGHMNnj0Zurjpy1llgtiesxQceqUYJgR2Cjt=w1299-h630)
 
 
 ## soal3
