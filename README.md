@@ -68,70 +68,114 @@ Anda merupakan pegawai magang pada sebuah perusahaan retail, dan anda diminta un
 Buatlah sebuah script bash yang dapat menghasilkan password secara acak sebanyak 12 karakter yang terdapat huruf besar, huruf kecil, dan angka. Password acak tersebut disimpan pada file berekstensi .txt dengan ketentuan pemberian nama sebagai berikut:
        Jika tidak ditemukan file password1.txt maka password acak tersebut disimpan pada file bernama password1.txt Jika file password1.txt sudah ada maka password acak baru akan disimpan pada file bernama password2.txt dan begitu seterusnya Urutan nama file tidak boleh ada yang terlewatkan meski filenya dihapus. Password yang dihasilkan tidak boleh sama.
  
- ```#!/bin/bash
 
+```#!/bin/bash
 
-  while [ $loop -ne 0 ] →loop terus sampai 0
-    do
-    if [[ -f /home/awin/praktikum1/password$ke.txt ]] ; then → jika ada file yang letaknya di direktori praktikum1 dengan nama password-      urutannya.txt maka jika sudah ada 
-  ke=$((ke + 1)) → maka urutannya akan bertambah
-  else
-  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1 > →dengan isi pasword secara acak sebanyak 12 karakter yang terdapat huruf besar, huruf kecil, dan angka, 12 karakter, dan 1 row
-  /home/awin/praktikum1/password$ke.txt→lalu akan disimpan di dir praktikum1 dengan nama password-urutannya
-  loop=0
-  fi
+uuid=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1) ->syntax untuk pembuatan password yang diacak 12 length 
 
-  done```
-  ```
+# echo $uuid
+
+file="password"
+ext=".txt"
+
+counter=1
+flag=1
+
+for passtxt in password/password*.txt->melakukan for ketika ada sembarang file yang diawali dengan password bla-bla-bla.txt akan dilakukan perintah
+do
+    path="password/password$counter.txt"->disimpan di direktori password, dan penamaan sesuai urutan saat di bash
+    #echo "${passtxt:17:1}"
+    if [[ "*" == ${passtxt:17:1} ]]
+    then
+        echo "Still empty, so create new file password$counter.txt" ->di cek dulu, karena belum ada list maka ditampilkan ketika    baru pertama kali bash 
+        echo "$uuid" > $path->dibuat password yang dimasukkan ke path
+        flag=0
+        break
+    elif [[ counter -ne ${passtxt:17:1} ]] 
+    then
+        echo "password$counter.txt not available, create new file"->dicek dulu dan list, ketika belum ada file
+        echo "$uuid" > $path-> dibuat password yang dimasukkan ke path
+        flag=0
+        break
+    else
+        echo "password$counter.txt available"->
+    fi
+counter=$((counter + 1))->increment penamaan password
+done
+
+if [[ flag -eq 1 ]]
+then
+    path="password/password$counter.txt"->disimpan di direktori password
+    echo "password$counter.txt not available, create new file"->password yang dibuat di akhir 
+    echo "$uuid" > $path
+fi
+```
 
 ## soal4
   Lakukan backup file syslog setiap jam dengan format nama file “jam:menit tanggal- bulan-tahun”. Isi dari file backup terenkripsi dengan      konversi huruf (string manipulation) yang disesuaikan dengan jam dilakukannya backup misalkan sebagai berikut:
    Huruf b adalah alfabet kedua, sedangkan saat ini waktu menunjukkan pukul 12, sehingga huruf b diganti dengan huruf alfabet yang memiliki urutan ke 12+2 = 14. Hasilnya huruf b menjadi huruf n karena huruf n adalah huruf ke empat belas, dan seterusnya. setelah huruf z akan kembali ke huruf a. Backup file syslog setiap jam. dan buatkan juga bash script untuk dekripsinya.
    enkripsi
    ```
-   #!/bin/bash
+  #!/bin/bash
 
-upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZ
-lowcase=abcdefghijklmnopqrstuvwxyz
+hour=$(date +"%H")
 
-up=($(echo ${upcase[@]})$(echo ${upcase[@]}))
-low=($(echo ${lowcase[@]})$(echo ${lowcase[@]}))
-hour=`date +"%H"`
-rot=$hour
+if [[ ${hour:0:1} -eq 0 ]]
+then
+    hour=${hour:1:1}
+fi
 
-xx=($(echo ${upcase[@]})$(echo ${lowcase[@]}))
-upp=$(echo $upercase | tr "${upcase:0:26}" "${up:${rot}:26}")
-loww=$(echo $lowcase | tr "${upcase:0:26}" "${low:${rot}:26}")
-xxx=($(echo ${up[@]})$(echo ${low[@]}))
+#echo $hour
 
-file=`date +"%H:%M %d-%m-%Y"`s
+lowcase=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+syslog=$(</var/log/syslog)
+#echo "$syslog"
+syslog=$(echo "$syslog" | tr "${lowcase:0:26}" "${lowcase:${hour}:26}")
+#echo "$syslog"
 
-< /var/log/syslog > "$file" tr "$xx" "$xxx"
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+syslog=$(echo "$syslog" | tr "${upcase:0:26}" "${upcase:${hour}:26}")
+#echo "$syslog"
 
+thishour=$(date +"%H:%M %d-%m-%Y")
+#echo "$thishour"
+
+echo "$syslog" > syslog/"$thishour"
 
    ```
    dekripsi
    
-   ```#!/bin/bash
+   ```
+   #!/bin/bash
+i=1
+for syslog in syslog/*
+do
+    echo "$i. ${syslog##*/}"
+    choose[i]=${syslog##*/}
+    i=$((i + 1))
+done
 
-upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZ
-lowcase=abcdefghijklmnopqrstuvwxyz
+echo "Please choose which one you want to decrypt(in number)>>"
+read this
+hour=$((${choose[this]:0:1}*10))
+hour=$((hour+${choose[this]:1:1}))
+echo $hour
+dec=$((26-hour))
 
-up=($(echo ${upcase[@]})$(echo ${upcase[@]}))
-low=($(echo ${lowcase[@]})$(echo ${lowcase[@]}))
-hour=`date +"%H"`
-rot=$hour
+echo $dec
+lowcase=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+syslog=$(<syslog/"${choose[this]}")
+#syslog="$syslog${choose[this]}"
+#echo "$syslog"
+syslog=$(echo "$syslog" | tr "${lowcase:0:26}" "${lowcase:${dec}:26}")
+#echo "$syslog"
 
-xx=($(echo ${upcase[@]})$(echo ${lowcase[@]}))
-upp=$(echo $upercase | tr "${upcase:0:26}" "${up:${rot}:26}")
-loww=$(echo $lowcase | tr "${upcase:0:26}" "${low:${rot}:26}")
-xxx=($(echo ${up[@]})$(echo ${low[@]}))
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+syslog=$(echo "$syslog" | tr "${upcase:0:26}" "${upcase:${dec}:26}")
+#echo "$syslog"
 
-file=`date +"%H:%M %d-%m-%Y"`s
-
-< /var/log/syslog > "$file" tr "$xx" "$xxx"
-
-
+#echo "$thishour"
+echo "$syslog" > dec/"${choose[this]}.dec"
 
   
   pengaturan crontab:
