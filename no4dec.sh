@@ -1,18 +1,31 @@
 #!/bin/bash
+i=1
+for syslog in syslog/*
+do
+    echo "$i. ${syslog##*/}"
+    choose[i]=${syslog##*/}
+    i=$((i + 1))
+done
 
-read new
+echo "Please choose which one you want to decrypt(in number)>>"
+read this
+hour=$((${choose[this]:0:1}*10))
+hour=$((hour+${choose[this]:1:1}))
+echo $hour
+dec=$((26-hour))
 
-up=ABCDEFGHIJKLMNOPQRSTUVWXYZ
-low=abcdefghijklmnopqrstuvwxyz
+echo $dec
+lowcase=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+syslog=$(<syslog/"${choose[this]}")
+#syslog="$syslog${choose[this]}"
+#echo "$syslog"
+syslog=$(echo "$syslog" | tr "${lowcase:0:26}" "${lowcase:${dec}:26}")
+#echo "$syslog"
 
-upp=($(echo ${up[@]})$(echo ${up[@]}))
-loww=($(echo ${low[@]})$(echo ${low[@]}))
-hour=${new:0:2}
-rot=$hour
+upcase=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+syslog=$(echo "$syslog" | tr "${upcase:0:26}" "${upcase:${dec}:26}")
+#echo "$syslog"
 
-xx=($(echo ${low[@]})$(echo ${up[@]}))
-A=$(echo $upp | tr "${upp:0:26}" "${upp:${rot}:26}")
-B=$(echo $loww | tr "${loww:0:26}" "${loww:${rot}:26}")
-xxx=($(echo ${A[@]})$(echo ${B[@]}))
+#echo "$thishour"
+echo "$syslog" > dec/"${choose[this]}.dec"
 
-< "$new" > "$new dec" tr "$xxx" "$xx"
